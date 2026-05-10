@@ -38,11 +38,15 @@ const pause = () => {
     // ✅ clearInterval을 이용해 멈추는 기능을 구현
     // 멈춘 시점의 남은 시간을 화면에 표시
     clearInterval(intervalId);
+    intervalId = null;
     display.textContent = remaining + '초 남음 (일시정지)';
 };
 
 // 재개 버튼
 const resume = () => {
+    if (intervalId) return;
+    if (remaining <= 0) return;
+
     // ✅ pause로 멈춘 상태에서 다시 setInterval을 실행해 이어서 카운트다운
     display.textContent = remaining + '초 남음';
     intervalId = setInterval(() => {
